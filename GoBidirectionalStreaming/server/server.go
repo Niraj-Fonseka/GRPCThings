@@ -7,7 +7,7 @@ import (
 
 	"google.golang.org/grpc"
 
-	pb "GRPCThings/BidirectionalStreaming/api"
+	pb "GRPCThings/GoBidirectionalStreaming/api"
 )
 
 type simpleServer struct {

@@ -7,7 +7,7 @@ import (
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 
-	pb "GRPCThings/BidirectionalStreaming/api"
+	pb "GRPCThings/GoBidirectionalStreaming/api"
 )
 
 func main() {
