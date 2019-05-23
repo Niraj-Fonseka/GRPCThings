@@ -1,0 +1,19 @@
+syntax = "proto3";
+package api;
+
+message PingMessage {
+    string greeting = 1;
+}
+
+message HealthMessage {
+    string health = 1;
+    bool status = 2;
+}
+service Ping {
+    rpc SayHello(stream PingMessage) returns (stream PingMessage) {}
+}
+
+service Health {
+    rpc HealthCheck(HealthMessage) returns (HealthMessage) {}
+}
+
