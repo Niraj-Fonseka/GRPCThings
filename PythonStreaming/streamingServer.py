@@ -14,8 +14,8 @@ class Pinger(api_pb2_grpc.PingServicer):
 
     def SayHello(self, request_iterator, context):
         print("In SayHello here")
-        for ping in request_iterator:
-            print(ping)
+        while True:
+            yield api_pb2.PingMessage(greeting='Hello from the python server')
 
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))

@@ -2,7 +2,8 @@ package main
 
 import (
 	"log"
-	"time"
+	"fmt"
+	"io"
 
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
@@ -24,18 +25,27 @@ func main() {
 
 	waitc := make(chan struct{})
 
-	ping := &api.PingMessage{Greeting: "foo"}
+	//ping := &api.PingMessage{Greeting: "foo"}
 
 	go func() {
 		for {
-			log.Println("Sleeping...")
-			time.Sleep(2 * time.Second)
-			log.Println("Sending msg...")
-			stream.Send(ping)
-		}
+			fmt.Println("Waiting to recieve")
+			in, err := stream.Recv()
+			log.Println("Received value")
+			if err == io.EOF {
+				fmt.Println("ENDDD")
+			}
+
+			fmt.Println(err)
+			
+			log.Println("Got " + in.Greeting)
+			}
 	}()
 	<-waitc
 	stream.CloseSend()
 
 	
 }
+
+
+
