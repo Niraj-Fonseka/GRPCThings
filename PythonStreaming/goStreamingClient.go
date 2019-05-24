@@ -3,7 +3,6 @@ package main
 import (
 	"log"
 	"fmt"
-	"time"
 	"io"
 
 	"golang.org/x/net/context"
@@ -34,9 +33,7 @@ func main() {
 			if err == io.EOF {
 				fmt.Println("ENDDD")
 			}
-			log.Printf("Message Recivbed : %s \n", in.Greeting)
-			time.Sleep( 5 * time.Second)
-			
+			log.Printf("Message Recivbed : %s \n", in.Greeting)			
 			}
 	}()
 	<-waitc
