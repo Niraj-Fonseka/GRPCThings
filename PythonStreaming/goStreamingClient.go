@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"fmt"
+	"time"
 	"io"
 
 	"golang.org/x/net/context"
@@ -29,16 +30,13 @@ func main() {
 
 	go func() {
 		for {
-			fmt.Println("Waiting to recieve")
 			in, err := stream.Recv()
-			log.Println("Received value")
 			if err == io.EOF {
 				fmt.Println("ENDDD")
 			}
-
-			fmt.Println(err)
+			log.Printf("Message Recivbed : %s \n", in.Greeting)
+			time.Sleep( 5 * time.Second)
 			
-			log.Println("Got " + in.Greeting)
 			}
 	}()
 	<-waitc

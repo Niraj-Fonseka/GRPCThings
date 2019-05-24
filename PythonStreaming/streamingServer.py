@@ -1,5 +1,7 @@
 from concurrent import futures
 import time
+import datetime
+
 import logging
 
 import grpc
@@ -14,8 +16,16 @@ class Pinger(api_pb2_grpc.PingServicer):
 
     def SayHello(self, request_iterator, context):
         print("In SayHello here")
+        message = 'Hello !' + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
         while True:
-            yield api_pb2.PingMessage(greeting='Hello from the python server')
+            print("Iteration")
+            time.sleep(3)
+            yield api_pb2.PingMessage(greeting=message)
+            message = 'Hello !' + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            print("Message : " , message)
+
+
 
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))

@@ -1,5 +1,6 @@
 from concurrent import futures
 import time
+import datetime
 import logging
 
 import grpc
@@ -13,7 +14,8 @@ _ONE_DAY_IN_SECONDS = 60 * 60 * 24
 class Pinger(api_pb2_grpc.PingServicer):
 
     def SayHello(self, request, context):
-        return api_pb2.PingMessage(greeting='Hello from the python server')
+        message = 'Hello !' + datetime.datetime.now()
+        return api_pb2.PingMessage(greeting='Hello !' , )
 
 
 def serve():
