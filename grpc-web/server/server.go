@@ -4,11 +4,10 @@ import (
 	"context"
 	"fmt"
 	"log"
-	"math/rand"
 	"net"
 	"time"
 
-	"grpc-web/server/calculatorpb"
+	"GRPCThings/grpc-web/server/calculatorpb"
 
 	"google.golang.org/grpc"
 )
@@ -25,11 +24,10 @@ func (*server) Add(context context.Context, req *calculatorpb.AddRequest) (*calc
 }
 
 func (*server) Fibonacci(req *calculatorpb.FibonacciRequest, stream calculatorpb.Calculator_FibonacciServer) error {
-
+	count := 0
 	for {
-		rand := rand.Int()
-		fmt.Println("Sending ... :", rand)
-		stream.Send(&calculatorpb.FibonacciResponse{Number: int32(rand)})
+		count++
+		stream.Send(&calculatorpb.FibonacciResponse{Number: int32(count)})
 		time.Sleep(time.Second * 2)
 	}
 

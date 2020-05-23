@@ -1,4 +1,4 @@
-module grpc-web/server
+module GRPCThings/grpc-web/server
 
 go 1.14
 
